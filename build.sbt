@@ -20,3 +20,6 @@ libraryDependencies += "com.iheart" %% "ficus" % "1.5.0"
 libraryDependencies += "io.circe" %% "circe-core"             % "0.13.0"
 libraryDependencies += "io.circe" %% "circe-generic"          % "0.13.0"
 libraryDependencies += "io.circe" %% "circe-jawn"             % "0.13.0"
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.2" % Test
+libraryDependencies += "org.scalamock" %% "scalamock" % "5.0.0" % Test
