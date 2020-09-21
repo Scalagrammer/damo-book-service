@@ -6,6 +6,8 @@ version := "0.1"
 
 scalaVersion := "2.13.3"
 
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
+
 libraryDependencies += "org.typelevel" %% "cats-effect" % "2.2.0"
 libraryDependencies += "com.github.finagle" %% "finchx-core"  % "0.32.1"
 libraryDependencies += "com.github.finagle" %% "finchx-circe" % "0.32.1"

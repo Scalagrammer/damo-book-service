@@ -12,17 +12,12 @@ trait BookService[F[_]] {
   def findById(id : UUID) : F[Option[Book]]
 }
 
-class BookServiceImpl[F[_] : Transactor : ContextShift](dao : BookDao)
-                                                       ( implicit T : Transactor[F]
-                                                                , B : Bracket[F, Throwable] ) extends BookService[F] {
+class BookServiceImpl[F[_] : Transactor : ContextShift : Bracket[*[_], Throwable]](dao : BookDao) extends BookService[F] {
 
-  import doobie.implicits._
-  import cats.syntax.apply._
+  import toolkit.utils.syntax.doobie._
   import toolkit.utils.syntax.convertible._
 
   override def findById(id : UUID) = {
-    OptionT(dao.findById(id).transact(T))
-      .map(_.to[Book])
-      .value <* ContextShift[F].shift // shift from IO to the service-layer
+    OptionT(dao.findById(id).within[F]).map(_.to[Book]).value
   }
 }
